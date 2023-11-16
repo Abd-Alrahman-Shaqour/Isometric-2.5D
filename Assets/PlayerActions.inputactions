@@ -2,13 +2,31 @@
     "name": "PlayerActions",
     "maps": [
         {
-            "name": "Movment",
+            "name": "PlayerInput",
             "id": "20fe5b78-449b-4ea0-a4f3-f851b36bbc7c",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Movment",
                     "type": "Value",
                     "id": "eec72ec6-14c1-4861-9438-1ddeeee7f8a2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "7d57f169-6ecc-43cb-9f52-9f1f43547430",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "bad88d65-6fee-4fc8-8944-559eb501c5c2",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -23,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Movment",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -34,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Movment",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -45,7 +63,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Movment",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -56,7 +74,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Movment",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -67,30 +85,13 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Movment",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Attack",
-            "id": "aca1af17-f76f-451a-aa87-2cd2e3fac3c5",
-            "actions": [
-                {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "1dbb3967-0304-4d53-bcd0-b84e40a8c849",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "4f647c36-44b3-45ca-8cf7-9c218ce788cb",
+                    "id": "24a19099-561c-4a2c-90ab-7ac3d519288d",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -98,32 +99,15 @@
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Pointer Pos",
-            "id": "9d8af99c-6fc2-4cf7-a64d-07c2cfce9f69",
-            "actions": [
-                {
-                    "name": "PointerPos",
-                    "type": "Value",
-                    "id": "b328e440-ef93-4181-aa09-7002ae0f25ce",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "c6ea96b0-cb26-4693-8c72-2cc88cce0af0",
+                    "id": "08c232a0-e61c-443f-a5ff-ce233b3c0c64",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PointerPos",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,24 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponParent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector2 aimPosition { get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    
-    private void GetPointerPos()
-    {
-        //Vector3 mousePos = Pointerpo
-    }
+    // private void Update()
+    // {
+    //     var direction = (aimPosition - (Vector2)transform.position).normalized;
+    //     transform.right = direction;
+    // }
 }
