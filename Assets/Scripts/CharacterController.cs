@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using Shiro.Weapons;
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
@@ -8,19 +11,36 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private InputActionReference movementInput, attackInput, aimInput;
     private WeaponParent _weaponParent;
     [SerializeField] private Transform weaponPivot;
-    private Vector2 scale;
+    private AttackHandler _attackHandler;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
-        scale = weaponPivot.localScale;
+        _weaponParent = GetComponentInChildren<WeaponParent>();
+        _attackHandler = GetComponent<AttackHandler>();
     }
 
     private void FixedUpdate()
     {
         HandleInput();
     }
-    
+
+    private void OnEnable()
+    {
+        attackInput.action.performed += PreformAttack;
+    }
+
+  
+    private void OnDisable()
+    {
+        attackInput.action.performed -= PreformAttack;
+    }  
+    private void PreformAttack(InputAction.CallbackContext obj)
+    { 
+        _attackHandler.Attack();
+    }
+
+
     private void HandleInput()
     {
         var movement = movementInput.action.ReadValue<Vector2>();
@@ -28,8 +48,8 @@ public class CharacterController : MonoBehaviour
 
         _rb.velocity = movement * (speed * Time.deltaTime);
 
-        FlipWeapon();
-        if (movementInput.action.IsPressed())
+        
+        if (movementInput.action.IsPressed() )
         {
             UpdateAnimation();
         }
@@ -40,20 +60,13 @@ public class CharacterController : MonoBehaviour
         _animator.SetFloat("Horizontal", _rb.velocity.x);
         _animator.SetFloat("Vertical", _rb.velocity.y);
     }
-    private void FlipWeapon()
-    {
-        Vector2 movement = _rb.velocity;
 
-        // Check if moving upwards or upwards-left
-        if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y))
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("WeaponContainer"))
         {
-            weaponPivot.localScale = new Vector3(1, 1, 1);
+            _weaponParent.SetUpWeapon(other.GetComponent<WeaponContainer>().weaponPickUp);
         }
-        else if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
-        {
-            // Face left only when moving left
-            weaponPivot.localScale = new Vector3(-1, 1, 1);
-        }
-        
+           
     }
 }

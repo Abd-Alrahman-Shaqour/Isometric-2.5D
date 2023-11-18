@@ -3,14 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Shiro.Weapons;
+using UnityEngine.Serialization;
 
 public class WeaponParent : MonoBehaviour
 {
-    public Vector2 aimPosition { get; set; }
+    [SerializeField]private AttackHandler attackHandler;
+    [SerializeField]private SpriteRenderer weaponSprit;
+    public void SetUpWeapon(Weapons weapon)
+    {
+        attackHandler.attackDelay = weapon.AttackDelay;
+        weaponSprit.sprite = weapon.WeaponSprite;
+        attackHandler.weaponDamage = weapon.WeaponDamage;
+        attackHandler.canAttack = true;
+    }
+    
 
-    // private void Update()
-    // {
-    //     var direction = (aimPosition - (Vector2)transform.position).normalized;
-    //     transform.right = direction;
-    // }
 }
