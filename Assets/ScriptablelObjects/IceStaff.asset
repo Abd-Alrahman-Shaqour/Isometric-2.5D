@@ -15,3 +15,7 @@ MonoBehaviour:
   <AttackDelay>k__BackingField: 0
   <WeaponSprite>k__BackingField: {fileID: 1245804595, guid: b20397ec0d2862d41ab4638d3c4b9e02, type: 3}
   <WeaponDamage>k__BackingField: 0
+  <HitBoxSize>k__BackingField: {x: 0, y: 0}
+  <HitBoxSOffSet>k__BackingField: {x: 0, y: 0}
+  <IsRanged>k__BackingField: 1
+  <ProjectilePrefab>k__BackingField: {fileID: 4759689669779763358, guid: 641f30b76c90d0141b8326c0af8a3ef8, type: 3}

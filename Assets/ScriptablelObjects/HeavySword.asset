@@ -15,3 +15,6 @@ MonoBehaviour:
   <AttackDelay>k__BackingField: 0.7
   <WeaponSprite>k__BackingField: {fileID: 21300000, guid: febb11a40c6ee8645b02eca4dbcf7de6, type: 3}
   <WeaponDamage>k__BackingField: 12
+  <IsRanged>k__BackingField: 0
+  <HitBoxSize>k__BackingField: {x: 0, y: 0.18}
+  <HitBoxSOffSet>k__BackingField: {x: 0.19009, y: 0.46}
