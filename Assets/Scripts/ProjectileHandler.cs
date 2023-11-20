@@ -5,13 +5,14 @@ using DG.Tweening;
 
 public class ProjectileHandler : MonoBehaviour
 {
-    [SerializeField] private float projectilSpeed;
-    [SerializeField] Ease ease;
-    void Start()
-    {
-        transform.DOMove(transform.position + transform.up * projectilSpeed, 3f)
-            .SetEase(ease)
-            .OnComplete(() => Destroy(gameObject)); // Destroy the projectile when the tween is complete
-    }
+    // [SerializeField] private float projectilSpeed;
+    // [SerializeField] private float projectilDuration;
+    // [SerializeField] Ease ease;
+    // void Start()
+    // {
+    //     transform.DOMove(transform.position + transform.right * projectilSpeed, projectilDuration)
+    //         .SetEase(ease)
+    //         .OnComplete(() => Destroy(gameObject)); // Destroy the projectile when the tween is complete
+    // }
    
 }

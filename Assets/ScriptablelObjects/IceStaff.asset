@@ -9,13 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973b4613fcd1a6a4f844449c6d89571a, type: 3}
+  m_Script: {fileID: 11500000, guid: becf06494f914074b5fac1b49febd026, type: 3}
   m_Name: IceStaff
   m_EditorClassIdentifier: 
-  <AttackDelay>k__BackingField: 0
+  <AttackSpeed>k__BackingField: 0
   <WeaponSprite>k__BackingField: {fileID: 1245804595, guid: b20397ec0d2862d41ab4638d3c4b9e02, type: 3}
   <WeaponDamage>k__BackingField: 0
-  <HitBoxSize>k__BackingField: {x: 0, y: 0}
-  <HitBoxSOffSet>k__BackingField: {x: 0, y: 0}
-  <IsRanged>k__BackingField: 1
-  <ProjectilePrefab>k__BackingField: {fileID: 4759689669779763358, guid: 641f30b76c90d0141b8326c0af8a3ef8, type: 3}
+  <projectilePrefab>k__BackingField: {fileID: 4759689669779763358, guid: 641f30b76c90d0141b8326c0af8a3ef8, type: 3}
+  <projectilSpeed>k__BackingField: 50
+  <projectilSprite>k__BackingField: {fileID: -1994218563, guid: b20397ec0d2862d41ab4638d3c4b9e02, type: 3}
+  <projectilDuration>k__BackingField: 3
+  <projectileEase>k__BackingField: 11
+  aimActionReference: {fileID: 299303791523090792, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}
+  movementAimActionReference: {fileID: 3080420442930643924, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}

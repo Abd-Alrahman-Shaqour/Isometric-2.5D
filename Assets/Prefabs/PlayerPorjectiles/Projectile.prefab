@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilSpeed: 2
-  ease: 18
+  projectilDuration: 3
+  ease: 17
 --- !u!212 &4759689669779763359
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class CharacterController : MonoBehaviour
     private Rigidbody2D _rb;
     private WeaponParent _weaponParent;
     private AttackHandler _attackHandler;
+    private RangedWeapons rangedWeapon;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -20,24 +21,20 @@ public class CharacterController : MonoBehaviour
         _attackHandler = GetComponent<AttackHandler>();
     }
 
+    private void Start()
+    {
+        _weaponParent.weaponChanged += OnWeaponChanged;
+    }
+
+    private void OnWeaponChanged()
+    {
+        Debug.Log("WeaponChanged");
+    }
+
     private void FixedUpdate()
     {
         HandleMovement();
          HandleAiming();
-    }
-    
-    private void OnEnable()
-    {
-        attackInput.action.performed += PreformAttack;
-    }
-    
-    private void OnDisable()
-    {
-        attackInput.action.performed -= PreformAttack;
-    }  
-    private void PreformAttack(InputAction.CallbackContext obj)
-    { 
-        _attackHandler.Attack();
     }
     
     private void HandleMovement()
@@ -51,13 +48,18 @@ public class CharacterController : MonoBehaviour
         if (!aimInput.action.IsPressed() && movementInput.action.IsPressed()  )
         {  
             UpdateAnimation(movement);
+            UpdateAim();
         }
     }
     private void HandleAiming()
     {
         var aim = aimInput.action.ReadValue<Vector2>();
         if (aimInput.action.IsPressed())
+        {
             UpdateAnimation(aim);
+            UpdateAim();
+        }
+            
     }
 
     private void UpdateAnimation(Vector2 lookDirection)
@@ -65,6 +67,22 @@ public class CharacterController : MonoBehaviour
         _animator.SetFloat("Horizontal", lookDirection.x);
         _animator.SetFloat("Vertical", lookDirection.y);
     }
+
+    //To Save The Last location The player Was looking at 
+    private void UpdateAim()
+    {
+        //TO DO : Weapon Pick Up Event
+        // Check if the weapon is a RangedWeapon
+        rangedWeapon = _attackHandler.data as RangedWeapons;
+        //
+        if (rangedWeapon != null)
+        {
+            // Update the aim direction in the RangedWeapon scriptable object
+            rangedWeapon.UpdateAimDirection();
+        }
+    }
+
+   
 
     private void OnTriggerEnter2D(Collider2D other)
     {

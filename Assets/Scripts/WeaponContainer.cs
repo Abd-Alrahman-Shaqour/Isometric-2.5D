@@ -12,7 +12,8 @@ public class WeaponContainer : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        if(weaponPickUp != null)
         GetComponent<SpriteRenderer>().sprite = weaponPickUp.WeaponSprite;
         ContainerAnim();
     }

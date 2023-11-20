@@ -2,68 +2,57 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Shiro.Weapons;
 
 public class AttackHandler : MonoBehaviour
 {
-    public float attackDelay { get; set; }
-    public float weaponDamage { get; set; }
-    public bool isRanged { get; set; }
+    public Weapons data;
     public Transform firePoint;
-    public bool canAttack = false;
-    public GameObject ProjectilePrefab { get; set; }
+    public bool canAttack = true;
+    [SerializeField] private InputActionReference attackInput;
     private AnimationEventHandler _animationEventHandler;
     private Animator _animator;
     private Vector2 _offSet;
+    private float LastAttackTime;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _animationEventHandler = GetComponent<AnimationEventHandler>();
     }
-
+    
     private void OnEnable()
     {
         _animationEventHandler.OnAttack += HandleHitBox;
         _animationEventHandler.OnFinish += AttackFinished;
+        attackInput.action.performed += Attack;
     }
 
     private void OnDisable()
     {
         _animationEventHandler.OnAttack -= HandleHitBox;
         _animationEventHandler.OnFinish -= AttackFinished;
+        attackInput.action.performed -= Attack;
     }
 
 
-    public void Attack()
+    private void Attack(InputAction.CallbackContext obj)
     {
-        if(!canAttack)
+        if (Time.time < data.AttackSpeed + LastAttackTime)
             return;
+        LastAttackTime = Time.time;
         _animator.SetTrigger("Attack");
-        if (isRanged)
-            RangedAttack();
-        canAttack = false;
-        StartCoroutine(AttackDelay());
+        data.Attack(transform);
     }
 
-    private void RangedAttack()
-    {
-        //ToFixInstantiatePos
-        Instantiate(ProjectilePrefab, firePoint.position, firePoint.rotation);
-    }
-
-    private IEnumerator AttackDelay()
-    {
-        yield return new WaitForSeconds(attackDelay);
-        canAttack = true;
-    }
     private void HandleHitBox()
     {
-        Debug.Log("AAAAAAAAAAAAAAAAAAAAA");
+        //DoSomething
     }
 
     private void AttackFinished()
     {
-        Debug.Log("Attack finished");
+        //DoSomething
     }
 
     

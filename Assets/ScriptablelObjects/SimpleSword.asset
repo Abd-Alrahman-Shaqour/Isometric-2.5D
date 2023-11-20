@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973b4613fcd1a6a4f844449c6d89571a, type: 3}
-  m_Name: BalancedSword
+  m_Script: {fileID: 11500000, guid: d4e31f60284847da9829f1fe088e278f, type: 3}
+  m_Name: SimpleSword
   m_EditorClassIdentifier: 
-  <AttackDelay>k__BackingField: 0.1
+  <AttackDelay>k__BackingField: 0
   <WeaponSprite>k__BackingField: {fileID: 21300000, guid: eec1af2e8e4d5844c82d5a4be66009ee, type: 3}
-  <WeaponDamage>k__BackingField: 3
-  <HitBoxSize>k__BackingField: {x: 0.002012199, y: 0.171625}
-  <HitBoxSOffSet>k__BackingField: {x: 0.1109872, y: 0.30675}
-  <IsRanged>k__BackingField: 0
-  <ProjectilePrefab>k__BackingField: {fileID: 0}
+  <WeaponDamage>k__BackingField: 0
+  <HitBoxSOffSet>k__BackingField: {x: 1, y: 1}
+  <HitBoxSize>k__BackingField: {x: 1, y: 1}
