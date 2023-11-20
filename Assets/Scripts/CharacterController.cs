@@ -3,34 +3,33 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Shiro.Weapons;
+using Shiro.Events;
 public class CharacterController : MonoBehaviour
 {
+    public Weapons data;
     [SerializeField] private float speed = 5f;
-    [SerializeField] private Transform weaponPivot;
-    [SerializeField] private InputActionReference movementInput, attackInput, aimInput;
-    private Animator _animator;
-    private Rigidbody2D _rb;
-    private WeaponParent _weaponParent;
-    private AttackHandler _attackHandler;
-    private RangedWeapons rangedWeapon;
+    //set in inspector
+    [SerializeField] private InputActionReference movementInput, aimInput;
+
+    #region Private
+        private PlayerEventHandler _playerEventHandler;
+        private Animator _animator;
+        private Rigidbody2D _rb;
+        private RangedWeapons rangedWeapon;
+    #endregion
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
-        _weaponParent = GetComponentInChildren<WeaponParent>();
-        _attackHandler = GetComponent<AttackHandler>();
+        _playerEventHandler = GetComponent<PlayerEventHandler>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        _weaponParent.weaponChanged += OnWeaponChanged;
+        _playerEventHandler.OnWeaponChanged += OnWeaponChanged;
     }
-
-    private void OnWeaponChanged()
-    {
-        Debug.Log("WeaponChanged");
-    }
-
+    
     private void FixedUpdate()
     {
         HandleMovement();
@@ -45,7 +44,7 @@ public class CharacterController : MonoBehaviour
         _rb.velocity = movement * (speed * Time.deltaTime);
 
         
-        if (!aimInput.action.IsPressed() && movementInput.action.IsPressed()  )
+        if (!aimInput.action.IsPressed() && movementInput.action.IsPressed() )
         {  
             UpdateAnimation(movement);
             UpdateAim();
@@ -68,27 +67,21 @@ public class CharacterController : MonoBehaviour
         _animator.SetFloat("Vertical", lookDirection.y);
     }
 
-    //To Save The Last location The player Was looking at 
+    //To Save The Last location The player Was looking at  if it is a ranged weapon
     private void UpdateAim()
     {
-        //TO DO : Weapon Pick Up Event
-        // Check if the weapon is a RangedWeapon
-        rangedWeapon = _attackHandler.data as RangedWeapons;
-        //
-        if (rangedWeapon != null)
-        {
+
+        if (rangedWeapon == null)
+            return;
             // Update the aim direction in the RangedWeapon scriptable object
             rangedWeapon.UpdateAimDirection();
-        }
+        
     }
 
-   
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("WeaponContainer"))
-        {
-            _weaponParent.SetUpWeapon(other.GetComponent<WeaponContainer>().weaponPickUp);
-        }
+    private void OnWeaponChanged()
+    {   
+        // Check if the weapon is a RangedWeapon
+        rangedWeapon = data as RangedWeapons;
     }
+
 }

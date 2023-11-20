@@ -1,59 +1,63 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Shiro.Events;
 using Shiro.Weapons;
 
 public class AttackHandler : MonoBehaviour
 {
     public Weapons data;
-    public Transform firePoint;
-    public bool canAttack = true;
-    [SerializeField] private InputActionReference attackInput;
-    private AnimationEventHandler _animationEventHandler;
-    private Animator _animator;
-    private Vector2 _offSet;
-    private float LastAttackTime;
+
+    #region Set In Inspector
+        [SerializeField] private SpriteRenderer weaponSprite;
+        [SerializeField] private InputActionReference attackInput;
+    #endregion
+
+
+    #region Private
+        private PlayerEventHandler _playerEventHandler;
+        private Animator _animator;
+        private float _lastAttackTime;
+    #endregion
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _animationEventHandler = GetComponent<AnimationEventHandler>();
+        _playerEventHandler = GetComponent<PlayerEventHandler>();
     }
-    
     private void OnEnable()
     {
-        _animationEventHandler.OnAttack += HandleHitBox;
-        _animationEventHandler.OnFinish += AttackFinished;
+        _playerEventHandler.OnAttack += HandleHitBox;
+        _playerEventHandler.OnFinish += AttackFinished;
+        _playerEventHandler.OnWeaponChanged += WeaponChnaged;
         attackInput.action.performed += Attack;
     }
-
     private void OnDisable()
     {
-        _animationEventHandler.OnAttack -= HandleHitBox;
-        _animationEventHandler.OnFinish -= AttackFinished;
+        _playerEventHandler.OnAttack -= HandleHitBox;
+        _playerEventHandler.OnFinish -= AttackFinished;
+        _playerEventHandler.OnWeaponChanged -= WeaponChnaged;
         attackInput.action.performed -= Attack;
     }
-
-
+    
     private void Attack(InputAction.CallbackContext obj)
     {
-        if (Time.time < data.AttackSpeed + LastAttackTime)
+        if (Time.time < data.AttackSpeed + _lastAttackTime)
             return;
-        LastAttackTime = Time.time;
+        _lastAttackTime = Time.time;
         _animator.SetTrigger("Attack");
         data.Attack(transform);
     }
-
+    private void WeaponChnaged()
+    {
+        weaponSprite.sprite = data.WeaponSprite;
+    }
     private void HandleHitBox()
     {
         //DoSomething
     }
-
     private void AttackFinished()
     {
         //DoSomething
     }
-
     
  }

@@ -141,11 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80271c0973d2a874599e7b73fb3ce26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
   speed: 50
   movementInput: {fileID: 3080420442930643924, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}
-  attackInput: {fileID: 678205787681846071, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}
   aimInput: {fileID: 299303791523090792, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}
-  weaponPivot: {fileID: 3423952020887132137}
 --- !u!95 &3423952019910805115
 Animator:
   serializedVersion: 5
@@ -179,10 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88da4f025bbaf5043b255422ec73b431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <attackDelay>k__BackingField: 0
-  <weaponDamage>k__BackingField: 0
-  <isRanged>k__BackingField: 0
-  canAttack: 0
+  data: {fileID: 0}
+  weaponSprite: {fileID: 3423952019953257365}
+  attackInput: {fileID: 0}
 --- !u!114 &3423952019910805109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +419,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3423952020887132137}
-  - component: {fileID: 3423952020887132138}
   m_Layer: 0
   m_Name: WeaponPivot
   m_TagString: Untagged
@@ -445,17 +442,3 @@ Transform:
   m_Father: {fileID: 3423952019910805119}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 14.8}
---- !u!114 &3423952020887132138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3423952020887132136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d5e2405e06f90c41b61a6803e21dd03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackHandler: {fileID: 3423952019910805108}
-  weaponSprit: {fileID: 3423952019953257365}
