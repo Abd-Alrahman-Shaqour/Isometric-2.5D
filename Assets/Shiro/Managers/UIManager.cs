@@ -1,5 +1,4 @@
-﻿using Shiro.Events;
-using UnityEngine;
+﻿using UnityEngine;
 using Shiro.Weapons;
 
 public class UIManager : MonoBehaviour
@@ -28,36 +27,7 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
-
-    private AttackHandler _attackHandler;
-    private CharacterController _characterController;
-    private PlayerEventHandler _playerEventHandler;
+    
     public GameObject pickUpWeaponButton;
-    public Weapons weapons;
-
-    public void SwitchToNewWeapon()
-    {
-        CheckPlayerRefs();
-        if (weapons == null)
-            return;
-        _attackHandler.data = weapons;
-        _characterController.data = weapons;
-        NotifyWeaponChanged();
-    }
-
-    private void CheckPlayerRefs()
-    {
-        if (_characterController == null)
-            _characterController = FindObjectOfType<CharacterController>();
-        if (_attackHandler == null)
-            _attackHandler = FindObjectOfType<AttackHandler>();
-        if (_playerEventHandler == null)
-            _playerEventHandler = FindObjectOfType<PlayerEventHandler>();
-    }
-
-    private void NotifyWeaponChanged()
-    {
-        // Check if there are subscribers before invoking the event
-        _playerEventHandler.OnWeaponChanged?.Invoke();
-    }
+    
 }

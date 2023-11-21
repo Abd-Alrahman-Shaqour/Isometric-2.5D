@@ -14,25 +14,10 @@ namespace Shiro.Weapons
         [field: SerializeField] public Sprite projectilSprite{ get; private set; }
         [field: SerializeField] public float projectilDuration{ get; private set; }
         [field: SerializeField] public Ease projectileEase{ get; private set; }
-        [Header("Aim Action Reference")]
-        [SerializeField]
-        private InputActionReference aimActionReference;
-        [SerializeField]
-        private InputActionReference movementAimActionReference;
-        private Vector2 _lastAimDirection;
-
-        public InputActionReference AimActionReference
-        {
-            get
-            {
-                // If player is not moving, return the movementAimActionReference
-                return aimActionReference.action.ReadValue<Vector2>() != Vector2.zero ? aimActionReference : movementAimActionReference;
-            }
-        }
         public override void Attack(Transform attacker)
         {
             InputAction aimAction = AimActionReference.action;
-            FireProjectile(attacker,_lastAimDirection);
+            FireProjectile(attacker,LastAimDirection);
         }
 
         void FireProjectile(Transform attacker,Vector2 aimDirection)
@@ -47,16 +32,6 @@ namespace Shiro.Weapons
                 .SetEase(projectileEase)
                 .OnComplete(() => Destroy(projectile));
         }
-        public void UpdateAimDirection()
-        {
-            // Use AimActionReference as needed
-            InputAction aimAction = AimActionReference.action;
 
-            // Read the aim direction
-            Vector2 aimDirection = aimAction.ReadValue<Vector2>();
-
-            // Save the last aim direction
-            _lastAimDirection = aimDirection;
-        }
     }
 }

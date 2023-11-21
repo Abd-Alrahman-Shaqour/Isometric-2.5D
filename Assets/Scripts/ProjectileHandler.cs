@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using DG.Tweening;
-
 public class ProjectileHandler : MonoBehaviour
 {
-    // [SerializeField] private float projectilSpeed;
-    // [SerializeField] private float projectilDuration;
-    // [SerializeField] Ease ease;
-    // void Start()
-    // {
-    //     transform.DOMove(transform.position + transform.right * projectilSpeed, projectilDuration)
-    //         .SetEase(ease)
-    //         .OnComplete(() => Destroy(gameObject)); // Destroy the projectile when the tween is complete
-    // }
-   
+    public int damage;
+    public LayerMask layer;
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        IDamageable damageable = other.GetComponent<IDamageable>();
+        if (damageable != null)
+            damageable.Damage(damage);
+    }
+    
 }

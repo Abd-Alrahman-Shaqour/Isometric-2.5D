@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Shiro.Weapons;
-using Shiro.Events;
 public class CharacterController : MonoBehaviour
 {
-    public Weapons data;
     [SerializeField] private float speed = 5f;
     //set in inspector
     [SerializeField] private InputActionReference movementInput, aimInput;
@@ -15,19 +13,19 @@ public class CharacterController : MonoBehaviour
         private PlayerEventHandler _playerEventHandler;
         private Animator _animator;
         private Rigidbody2D _rb;
-        private RangedWeapons rangedWeapon;
+        private Weapons rangedWeapon;
     #endregion
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
-        _playerEventHandler = GetComponent<PlayerEventHandler>();
+       // _playerEventHandler = GetComponent<PlayerEventHandler>();
     }
 
     private void OnEnable()
     {
-        _playerEventHandler.OnWeaponChanged += OnWeaponChanged;
+        PlayerEventHandler.OnWeaponChanged += OnWeaponChanged;
     }
     
     private void FixedUpdate()
@@ -78,10 +76,10 @@ public class CharacterController : MonoBehaviour
         
     }
 
-    private void OnWeaponChanged()
+    private void OnWeaponChanged(Weapons newWeaponData)
     {   
         // Check if the weapon is a RangedWeapon
-        rangedWeapon = data as RangedWeapons;
+        rangedWeapon = newWeaponData as RangedWeapons;
     }
 
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Shiro.Events;
 using Shiro.Weapons;
+using UnityEngine.Serialization;
 
 public class AttackHandler : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class AttackHandler : MonoBehaviour
 
     #region Set In Inspector
         [SerializeField] private SpriteRenderer weaponSprite;
+        [SerializeField] private  Transform weaponTransform;
         [SerializeField] private InputActionReference attackInput;
     #endregion
 
@@ -28,28 +29,34 @@ public class AttackHandler : MonoBehaviour
     {
         _playerEventHandler.OnAttack += HandleHitBox;
         _playerEventHandler.OnFinish += AttackFinished;
-        _playerEventHandler.OnWeaponChanged += WeaponChnaged;
+        PlayerEventHandler.OnWeaponChanged += WeaponChanged;
         attackInput.action.performed += Attack;
     }
     private void OnDisable()
     {
         _playerEventHandler.OnAttack -= HandleHitBox;
         _playerEventHandler.OnFinish -= AttackFinished;
-        _playerEventHandler.OnWeaponChanged -= WeaponChnaged;
+       PlayerEventHandler.OnWeaponChanged -= WeaponChanged;
         attackInput.action.performed -= Attack;
     }
     
     private void Attack(InputAction.CallbackContext obj)
     {
-        if (Time.time < data.AttackSpeed + _lastAttackTime)
+        if(data == null)
+            return;
+        if (Time.time < data.AttackSpeed + _lastAttackTime )
             return;
         _lastAttackTime = Time.time;
         _animator.SetTrigger("Attack");
-        data.Attack(transform);
+        data.Attack(weaponTransform);
     }
-    private void WeaponChnaged()
+    private void WeaponChanged(Weapons newWeaponData)
     {
-        weaponSprite.sprite = data.WeaponSprite;
+        data = newWeaponData;
+        weaponSprite.sprite = newWeaponData.WeaponSprite;
+        var ranged = newWeaponData as RangedWeapons;
+        if (ranged != null)
+            ranged.projectilePrefab.GetComponent<ProjectileHandler>().damage = newWeaponData.WeaponDamage;
     }
     private void HandleHitBox()
     {
@@ -59,5 +66,5 @@ public class AttackHandler : MonoBehaviour
     {
         //DoSomething
     }
-    
+
  }

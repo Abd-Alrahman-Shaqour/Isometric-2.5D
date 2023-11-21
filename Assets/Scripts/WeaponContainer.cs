@@ -23,5 +23,4 @@ public class WeaponContainer : MonoBehaviour
         transform.DOLocalMoveY(transform.position.y + 0.1f, animationDuration).SetLoops(-1,LoopType.Yoyo);
     }
 
-
 }
