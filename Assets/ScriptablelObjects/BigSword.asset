@@ -19,10 +19,11 @@ MonoBehaviour:
   movementAimActionReference: {fileID: 3080420442930643924, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}
   <HitBox>k__BackingField:
     serializedVersion: 2
-    x: -0.12
-    y: -0.01
+    x: 0.02
+    y: 0.02
     width: 0.27
     height: 0.3
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  debug: 0

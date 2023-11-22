@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Shiro.Weapons;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
 public class CharacterController : PlayerCore
@@ -18,7 +19,7 @@ public class CharacterController : PlayerCore
         base.Awake();
         _rb = GetComponent<Rigidbody2D>();
     }
- 
+    
     private void FixedUpdate()
     {
         HandleMovement();

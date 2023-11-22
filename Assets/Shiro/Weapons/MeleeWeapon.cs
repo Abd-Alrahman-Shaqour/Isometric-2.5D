@@ -1,6 +1,7 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Shiro.Weapons
 {
@@ -10,6 +11,8 @@ namespace Shiro.Weapons
         [field: Header("Melee Weapon Settings")]
         [field: SerializeField] public Rect HitBox { get; private set; }
         [field: SerializeField] public LayerMask targetLayer;
+        [field: Header("Debug hit box")]
+        public bool debug;
 
         private Vector2 _offset;
 
@@ -23,13 +26,18 @@ namespace Shiro.Weapons
         void MeleeAttack(Transform attacker, Vector2 aimDirection)
         {
             float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-            var position = attacker.position;
-            _offset.Set(position.x + (HitBox.size.x * angle), position.z);
+            // Calculate the offset based on the angle
+            float offsetX = Mathf.Cos(angle * Mathf.Deg2Rad) * HitBox.center.x;
+            float offsetY = Mathf.Sin(angle * Mathf.Deg2Rad) * HitBox.center.y;
 
+            Vector2 offset = new Vector2(offsetX, offsetY);
+            Vector2 position = (Vector2)attacker.position + offset;
+            
             // Draw the isometric cube edges for debugging
-            DrawDebugIsometricCube(_offset, HitBox.size, Color.red, 1f);
+            if(debug)
+             DrawDebugIsometricCube(position, HitBox.size, Color.red, 1f);
 
-            Collider2D[] hitColliders = Physics2D.OverlapBoxAll(_offset, HitBox.size, 0f, targetLayer);
+            Collider2D[] hitColliders = Physics2D.OverlapBoxAll(position, HitBox.size, angle, targetLayer);
 
             foreach (Collider2D collider in hitColliders)
             {

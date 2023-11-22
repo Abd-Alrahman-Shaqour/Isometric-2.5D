@@ -16,10 +16,11 @@ public class AttackHandler : PlayerCore
     
     protected override void OnEnable()
     {
+        Debug.Log("atk override on enable");
         base.OnEnable();
         PlayerEventHandler.OnAttack += HandleHitBox;
         PlayerEventHandler.OnFinish += AttackFinished;
-        PlayerEventHandler.OnWeaponChanged += WeaponChanged;
+        PlayerEventHandler.OnWeaponChanged += AttackHandler_OnWeaponChange;
         attackInput.action.performed += Attack;
     }
     protected override void OnDisable()
@@ -27,7 +28,7 @@ public class AttackHandler : PlayerCore
         base.OnDisable();
         PlayerEventHandler.OnAttack -= HandleHitBox;
         PlayerEventHandler.OnFinish -= AttackFinished;
-        PlayerEventHandler.OnWeaponChanged -= WeaponChanged;
+        PlayerEventHandler.OnWeaponChanged -= AttackHandler_OnWeaponChange;
         attackInput.action.performed -= Attack;
     }
     
@@ -41,7 +42,7 @@ public class AttackHandler : PlayerCore
         Animator.SetTrigger("Attack");
         currentWeaponData.Attack(weaponTransform);
     }
-    private void WeaponChanged(Weapons newWeaponData)
+    private void AttackHandler_OnWeaponChange(Weapons newWeaponData)
     {
         weaponSprite.sprite = newWeaponData.WeaponSprite;
     }
