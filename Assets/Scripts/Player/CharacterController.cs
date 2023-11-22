@@ -3,35 +3,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Shiro.Weapons;
-public class CharacterController : MonoBehaviour
+using UnityEngine.Serialization;
+
+public class CharacterController : PlayerCore
 {
-    [SerializeField] private float speed = 5f;
-    //set in inspector
-    [SerializeField] private InputActionReference movementInput, aimInput;
-
+    [SerializeField] private float movementSpeed = 50f;
     #region Private
-        private PlayerEventHandler _playerEventHandler;
-        private Animator _animator;
         private Rigidbody2D _rb;
-        private Weapons rangedWeapon;
     #endregion
-
-    private void Awake()
+    //set in inspector
+   [SerializeField] private InputActionReference movementInput,aimInput;
+    protected override void Awake()
     {
-        _animator = GetComponent<Animator>();
+        base.Awake();
         _rb = GetComponent<Rigidbody2D>();
-       // _playerEventHandler = GetComponent<PlayerEventHandler>();
     }
-
-    private void OnEnable()
-    {
-        PlayerEventHandler.OnWeaponChanged += OnWeaponChanged;
-    }
-    
+ 
     private void FixedUpdate()
     {
         HandleMovement();
-         HandleAiming();
+        HandleAiming();
     }
     
     private void HandleMovement()
@@ -39,7 +30,7 @@ public class CharacterController : MonoBehaviour
         var movement = movementInput.action.ReadValue<Vector2>();
         movement.Normalize(); // Normalize to ensure consistent speed in all directions
 
-        _rb.velocity = movement * (speed * Time.deltaTime);
+        _rb.velocity = movement * (movementSpeed * Time.deltaTime);
 
         
         if (!aimInput.action.IsPressed() && movementInput.action.IsPressed() )
@@ -60,26 +51,20 @@ public class CharacterController : MonoBehaviour
     }
 
     private void UpdateAnimation(Vector2 lookDirection)
-    {
-        _animator.SetFloat("Horizontal", lookDirection.x);
-        _animator.SetFloat("Vertical", lookDirection.y);
+    {  
+        Animator.SetFloat("Horizontal", lookDirection.x);
+        Animator.SetFloat("Vertical", lookDirection.y);
     }
 
-    //To Save The Last location The player Was looking at  if it is a ranged weapon
+    //To Save The Last location The player Was looking at
     private void UpdateAim()
     {
 
-        if (rangedWeapon == null)
+        if (currentWeaponData == null)
             return;
             // Update the aim direction in the RangedWeapon scriptable object
-            rangedWeapon.UpdateAimDirection();
+            currentWeaponData.UpdateAimDirection();
         
     }
-
-    private void OnWeaponChanged(Weapons newWeaponData)
-    {   
-        // Check if the weapon is a RangedWeapon
-        rangedWeapon = newWeaponData as RangedWeapons;
-    }
-
+    
 }

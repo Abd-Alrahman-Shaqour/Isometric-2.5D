@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     // References to other managers
      public UIManager uiManager;
      public AudioManager audioManager;
+     public SaveManager saveManger;
      #endregion
      private void Awake()
      {
@@ -64,8 +65,14 @@ public class GameManager : MonoBehaviour
                  audioManager = gameObject.AddComponent<AudioManager>();
              }
          }
+         if (saveManger == null)
+         {
+             saveManger = FindObjectOfType<SaveManager>();
+             if (audioManager == null)
+             {
+                 saveManger = gameObject.AddComponent<SaveManager>();
+             }
+         }
      }
-   
-    
-   
+     
 }

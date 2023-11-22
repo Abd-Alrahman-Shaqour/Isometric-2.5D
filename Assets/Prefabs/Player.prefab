@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 3423952019910805118}
   - component: {fileID: 3423952019910805113}
   - component: {fileID: 3423952019910805112}
+  - component: {fileID: 5555870737342186495}
   - component: {fileID: 3423952019910805114}
-  - component: {fileID: 3423952019910805115}
-  - component: {fileID: 3423952019910805108}
   - component: {fileID: 3423952019910805109}
+  - component: {fileID: 3423952019910805108}
+  - component: {fileID: 3423952019910805115}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -129,6 +130,23 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &5555870737342186495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423952019910805117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d1509f10574eab9bc3815950ca28d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats:
+    health: 100
+    name: Shiro
+    currentWeapon: {fileID: 0}
+    coins: 0
 --- !u!114 &3423952019910805114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,10 +159,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80271c0973d2a874599e7b73fb3ce26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  speed: 50
+  playerStats:
+    health: 100
+    name: Shiro
+    currentWeapon: {fileID: 0}
+    coins: 0
+  movementSpeed: 5
   movementInput: {fileID: 3080420442930643924, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}
   aimInput: {fileID: 299303791523090792, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}
+--- !u!114 &3423952019910805109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423952019910805117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8b6711d54147a0a8109fafa307755c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats:
+    health: 100
+    name: Shiro
+    currentWeapon: {fileID: 0}
+    coins: 0
+--- !u!114 &3423952019910805108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423952019910805117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88da4f025bbaf5043b255422ec73b431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats:
+    health: 100
+    name: Shiro
+    currentWeapon: {fileID: 0}
+    coins: 0
+  weaponSprite: {fileID: 3423952019953257365}
+  weaponTransform: {fileID: 3423952019953257364}
+  attackInput: {fileID: 678205787681846071, guid: 8f0ea5a496f56814ea9f355ea2a33336, type: 3}
 --- !u!95 &3423952019910805115
 Animator:
   serializedVersion: 5
@@ -166,33 +225,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3423952019910805108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3423952019910805117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88da4f025bbaf5043b255422ec73b431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  weaponSprite: {fileID: 3423952019953257365}
-  attackInput: {fileID: 0}
---- !u!114 &3423952019910805109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3423952019910805117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8b6711d54147a0a8109fafa307755c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3423952019953257371
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,22 +4,19 @@
 
     public class PlayerCollisionHandler : MonoBehaviour
     {
-        #region Private
-            private Weapons _weapons;
-            private PlayerEventHandler _playerEventHandler;
-        #endregion
+        private PlayerEventHandler _eventHandler;
 
         private void Awake()
         {
-            _playerEventHandler = FindObjectOfType<PlayerEventHandler>();
+            _eventHandler = GetComponentInParent<PlayerEventHandler>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("WeaponContainer"))
             {
-                _weapons = other.GetComponent<WeaponContainer>().weaponPickUp;
-                _playerEventHandler.weapons = _weapons;
+                Weapons newWeaponData = other.GetComponent<WeaponContainer>().weaponPickUp;
+                _eventHandler.newWeapon = newWeaponData;
                 UIManager.Instance.pickUpWeaponButton.SetActive(true);
             }
         
@@ -29,8 +26,7 @@
         {
             if (other.CompareTag("WeaponContainer"))
             {
-                _weapons = null;
-                _playerEventHandler.weapons = _weapons;
+                _eventHandler.newWeapon = null;
                 UIManager.Instance.pickUpWeaponButton.SetActive(false);
             }
             
