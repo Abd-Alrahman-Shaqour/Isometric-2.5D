@@ -21,9 +21,18 @@ public class JsonDataService : IDataService
                 {
                     Debug.Log("Writing File to the first time!");
                 }
-                using FileStream stream = File.Create(path);
-                stream.Close();
-                File.WriteAllText(path, JsonConvert.SerializeObject(Data));
+                JsonSerializerSettings settings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+
+                string jsonData = JsonConvert.SerializeObject(Data, Formatting.Indented, settings);
+
+                using (FileStream stream = File.Create(path))
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(jsonData);
+                }
                 return true;
             }
             catch (Exception e)

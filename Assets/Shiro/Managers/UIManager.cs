@@ -1,33 +1,61 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Shiro.Weapons;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    #region Instance
+    public GameObject pickUpWeaponButton;
+    public static event Action<UiState> OnUIStateChanged; 
+    public UiState State;
 
-    private static UIManager _instance;
-
-    public static UIManager Instance
+    public void UpdateUiState(UiState newState)
     {
-        get
+        State = newState;
+        switch (newState)
         {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<UIManager>();
-
-                if (_instance == null)
-                {
-                    GameObject singletonObject = new GameObject("UIManager");
-                    _instance = singletonObject.AddComponent<UIManager>();
-                }
-            }
-
-            return _instance;
+            case UiState.MainMenu:
+                HandleMainMenu();
+                break;
+            case UiState.GameMenu:
+                HandleGameMenu();
+                break;
+            case UiState.GamePlay:
+                HandleGamePlay();
+                break;
+            case UiState.GameOver:
+                HandleGameOver();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
+        OnUIStateChanged?.Invoke(newState);
     }
 
-    #endregion
-    
-    public GameObject pickUpWeaponButton;
-    
+    private void HandleMainMenu()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandleGameMenu()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandleGamePlay()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandleGameOver()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public enum UiState
+{
+    MainMenu,
+    GameMenu,
+    GamePlay,
+    GameOver
 }

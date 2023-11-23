@@ -6,11 +6,13 @@ using UnityEngine.Serialization;
 
 public class PlayerCore : MonoBehaviour
 {       
-        public PlayerStats playerStats = new PlayerStats();
-       
         public Weapons currentWeaponData;
         protected PlayerEventHandler PlayerEventHandler;
         protected Animator Animator;
+        private int _health = 99 ;
+        private string _playerName;
+        private int _coins;
+        
 
         protected virtual void Awake()
         { 
@@ -27,11 +29,30 @@ public class PlayerCore : MonoBehaviour
         }  
         private void PlayerCore_OnWeaponChange(Weapons newWeaponData)
         {
-            playerStats.currentWeapon = newWeaponData;
             currentWeaponData = newWeaponData;
             var ranged = newWeaponData as RangedWeapons;
             if (ranged != null)
                 ranged.projectilePrefab.GetComponent<ProjectileHandler>().damage = newWeaponData.WeaponDamage;
+        }
+        public void SaveGame()
+        {
+            PlayerStats playerStats = new PlayerStats();
+            playerStats.health = _health;
+            playerStats.name = _playerName;
+            playerStats.coins = _coins;
+
+            // Save the identifier of the current weapon
+            if (currentWeaponData != null)
+            {
+                playerStats.currentWeaponId = currentWeaponData.name; // Assuming 'name' is the identifier
+            }
+            else
+            {
+                playerStats.currentWeaponId = null; // No current weapon
+            }
+
+            // Save the player stats
+            SaveManager.Instance.SerializeJson(playerStats);
         }
 
 }

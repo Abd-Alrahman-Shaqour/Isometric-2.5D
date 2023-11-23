@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : Singleton<SaveManager>
 {
     private IDataService _dataService = new JsonDataService();
     private bool _encryptionEnabled;

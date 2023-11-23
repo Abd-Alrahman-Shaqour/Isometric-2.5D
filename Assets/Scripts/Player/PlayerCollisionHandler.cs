@@ -5,10 +5,12 @@
     public class PlayerCollisionHandler : MonoBehaviour
     {
         private PlayerEventHandler _eventHandler;
+        private UIManager _uiManager;
 
         private void Awake()
         {
             _eventHandler = GetComponentInParent<PlayerEventHandler>();
+            _uiManager = UIManager.Instance;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

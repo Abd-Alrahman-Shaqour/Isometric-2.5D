@@ -26,4 +26,4 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  debug: 0
+  debug: 1
