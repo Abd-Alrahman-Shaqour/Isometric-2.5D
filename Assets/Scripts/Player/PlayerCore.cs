@@ -14,6 +14,9 @@ public class PlayerCore : MonoBehaviour,IDamageable
         protected PlayerEventHandler PlayerEventHandler;
         protected Animator Animator;
         protected GameManager _gameManager;
+        protected AudioManager audioManager;
+        private UIManager _uiManager;
+        
 
         protected virtual void Awake()
         { 
@@ -21,10 +24,13 @@ public class PlayerCore : MonoBehaviour,IDamageable
           PlayerEventHandler = GetComponent<PlayerEventHandler>();
           PlayerEventHandler.OnWeaponChanged += PlayerCore_OnWeaponChange;
           _gameManager = GameManager.Instance;
+          _uiManager = UIManager.Instance;
+          audioManager = AudioManager.Instance;
         }
 
         private void Start()
         {
+            _gameManager.PayerCore = this;
             LoadPlayerStats();
         }
       
@@ -40,6 +46,8 @@ public class PlayerCore : MonoBehaviour,IDamageable
         public void CollectCoins(int amount)
         {
             playerStats.coins += amount;
+            audioManager.Play("CoinCollected");
+            _uiManager.UpdateGold(playerStats.coins);
         }
         private void LoadPlayerStats()
         {
@@ -51,13 +59,22 @@ public class PlayerCore : MonoBehaviour,IDamageable
                 PlayerEventHandler.newWeapon = newWeapon;
                 PlayerEventHandler.WeaponChanged();
             }
+            _uiManager.UpdateGold(playerStats.coins);
+            _uiManager.UpdateHealthBar(playerStats.health);
         }
 
         public void Damage(int damage)
         {
             playerStats.health -= damage;
-            if ( playerStats.health  <= 0)
+            _uiManager.UpdateHealthBar(playerStats.health);
+            if (playerStats.health <= 0)
+            {
+                playerStats.health = 100;
+                _gameManager.SaveGame();
                 _gameManager.UpdateGameState(GameState.GameOver);
+                Destroy(gameObject);
+            }
+                
         }
         protected virtual void OnDestroy()
         {

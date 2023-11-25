@@ -1,5 +1,7 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : SingletonPersistant<UIManager>
 {
@@ -8,6 +10,8 @@ public class UIManager : SingletonPersistant<UIManager>
     [SerializeField] private GameObject gamePlayUI;
     [SerializeField] private GameObject gameMenu;
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private Scrollbar playerHealthUI;
+    [SerializeField] private TMP_Text playerGold;
     private Canvas _canvas;
     private SceneChangeManager _sceneChangeManager;
     
@@ -32,6 +36,7 @@ public class UIManager : SingletonPersistant<UIManager>
 
     public void UpdateUiState(GameState newState)
     {
+        Debug.Log(newState);
         switch (newState)
         {
             case GameState.MainMenu:
@@ -107,5 +112,16 @@ public class UIManager : SingletonPersistant<UIManager>
     {
         _sceneChangeManager.NextScene(SceneDefs.PlayerHub);
     }
-    #endregion
+
+     public void UpdateHealthBar(int playerHealth)
+     {
+         playerHealthUI.size = playerHealth / 100f;
+     }
+
+     public void UpdateGold(int newGoldTotal)
+     {
+         playerGold.SetText(newGoldTotal.ToString());
+     }
+
+     #endregion
 }

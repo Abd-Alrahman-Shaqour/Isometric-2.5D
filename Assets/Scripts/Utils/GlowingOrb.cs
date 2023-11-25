@@ -10,20 +10,23 @@ public class GlowingOrb : MonoBehaviour
     [SerializeField]private float animationDuration;
 
     [SerializeField] private Sprite curroptedOrb, goldenOrb;
-
+    
+    [SerializeField]private GameObject doorExit;
+    [SerializeField] private AudioSource audioSource;
     private SpriteRenderer _spriteRenderer;
     private EnemySpawnManager _enemySpawnManager;
     private GameManager _gameManager;
-
+    private AudioManager _audioManager;
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _enemySpawnManager = EnemySpawnManager.Instance;
         _gameManager = GameManager.Instance;
-        _enemySpawnManager.OnLevelStateChanged += EnemySpawnManagerOnLevelStateChanged;
+        _audioManager = AudioManager.Instance;
+        EnemySpawnManager.OnLevelStateChanged += EnemySpawnManagerOnLevelStateChanged;
+        GameManager.OnGameStateChanged += GameManagerOnLevelStateChanged;
     }
-
-  
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,21 +41,29 @@ public class GlowingOrb : MonoBehaviour
             if (_enemySpawnManager.levelState != LevelState.AllEnemiesDead)
             {
                 _spriteRenderer.sprite = curroptedOrb;
-                _enemySpawnManager.UpdateGameState(LevelState.SpawnEnemies);
+                _enemySpawnManager.UpdateEnemyState(LevelState.SpawnEnemies,5);
+                GetComponent<BoxCollider2D>().enabled = false;
+                doorExit.SetActive(false);
             }
     } 
     private void OnDestroy()
     {
-        _enemySpawnManager.OnLevelStateChanged -= EnemySpawnManagerOnLevelStateChanged;
+        EnemySpawnManager.OnLevelStateChanged -= EnemySpawnManagerOnLevelStateChanged;
+    }
+    private void GameManagerOnLevelStateChanged(GameState obj)
+    {
+        if(obj == GameState.GameOver)
+            audioSource.Stop();
     }
     private void EnemySpawnManagerOnLevelStateChanged(LevelState levelState)
     {
         if (levelState == LevelState.AllEnemiesDead)
         {
             _spriteRenderer.sprite = goldenOrb;
-       
-        }     _gameManager.SaveGame();
-            
+            _audioManager.Play("DoorOpen");
+            doorExit.SetActive(true);
+            _gameManager.SaveGame();
+        }     
     }
 
 }

@@ -6,7 +6,7 @@ public class GameManager : SingletonPersistant<GameManager>
     public GameState state;
     public static event Action<GameState> OnGameStateChanged;
     private SaveManager _saveManager;
-    private PlayerCore _playerCore;
+    public PlayerCore PayerCore { get; set;}
 
     private void Awake()
     {
@@ -24,16 +24,12 @@ public class GameManager : SingletonPersistant<GameManager>
         switch (newState)
         {
             case GameState.MainMenu:
-                HandleMainMenu();
                 break;
             case GameState.GameMenu:
-                HandleGameMenu();
                 break;
             case GameState.GamePlay:
-                HandleGamePlay();
                 break;
             case GameState.GameOver:
-                HandleGameOver();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -41,37 +37,14 @@ public class GameManager : SingletonPersistant<GameManager>
 
         OnGameStateChanged?.Invoke(newState);
     }
-
-    #region GameStates
-
-    private void HandleMainMenu()
-    {
-        Debug.Log("MainMenu");
-    }
-
-    private void HandleGameMenu()
-    {
-        
-    }
-
-    private void HandleGamePlay()
-    {
-        Debug.Log("HandleGamePlay");
-    }
-
-    private void HandleGameOver()
-    {
-        throw new NotImplementedException();
-    }
-
-    #endregion
+    
     
     public void SaveGame()
     {
-        _playerCore ??= FindObjectOfType<PlayerCore>();
+        PayerCore ??= FindObjectOfType<PlayerCore>();
 
-        if (_playerCore != null)
-            _saveManager.SerializeJson(_playerCore.playerStats);
+        if (PayerCore != null)
+            _saveManager.SerializeJson(PayerCore.playerStats);
         else
             Debug.LogError("PlayerCoreNotFound");
     }

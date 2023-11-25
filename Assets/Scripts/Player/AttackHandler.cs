@@ -38,6 +38,7 @@ public class AttackHandler : PlayerCore
             return;
         _lastAttackTime = Time.time;
         Animator.SetTrigger("Attack");
+        audioManager.Play("PlayerAttack");
         currentWeaponData.Attack(weaponTransform);
     }
     private void AttackHandler_OnWeaponChange(Weapons newWeaponData)

@@ -4,21 +4,25 @@ using UnityEngine;
 public class EnemySpawnManager : Singleton<EnemySpawnManager>
 {
     public LevelState levelState;
-    public event Action<LevelState> OnLevelStateChanged;
-    public void UpdateGameState(LevelState newState)
+    public static event Action<LevelState> OnLevelStateChanged;
+    private int _numberOfEnemies;
+    [SerializeField] private EnemySpawner enemySpawner;
+    private AudioManager _audioManager;
+
+    private void Start()
+    {
+        _audioManager = AudioManager.Instance;
+    }
+
+    public void UpdateEnemyState(LevelState newState,int enemiesToSpawn)
     {
         levelState = newState;
         switch (newState)
         {
-
             case LevelState.SpawnEnemies:
-                HandleSpawnEnemies();
+                HandleSpawnEnemies(enemiesToSpawn);
                 break;
             case LevelState.AllEnemiesDead:
-                HandleAllEnemiesDead();
-                break;
-            case LevelState.GameOver:
-                HandleGameOver();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -27,26 +31,25 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         OnLevelStateChanged?.Invoke(newState);
     }
 
-    private void HandleSpawnEnemies()
+   
+    private void HandleSpawnEnemies(int enemiesToSpawn)
     {
-        throw new NotImplementedException();
+        _audioManager.Play("EnemySpawn");
+        _numberOfEnemies = enemiesToSpawn;
+        enemySpawner.InstantiateEnemies(enemiesToSpawn);
     }
-
-    private void HandleAllEnemiesDead()
+    public void HandleEnemyDeath()
     {
-        throw new NotImplementedException();
+        _numberOfEnemies -= 1;
+        if(levelState == LevelState.SpawnEnemies && _numberOfEnemies == 0)
+            UpdateEnemyState(LevelState.AllEnemiesDead,0);
     }
-
-    private void HandleGameOver()
-    {
-        throw new NotImplementedException();
-    }
+    
+ 
 }
 
 public enum LevelState
 {
-   
     SpawnEnemies,
-    AllEnemiesDead,
-    GameOver
+    AllEnemiesDead
 }

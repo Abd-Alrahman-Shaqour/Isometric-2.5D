@@ -15,6 +15,13 @@ public class SceneChangeManager : Singleton<SceneChangeManager>
         SceneManager.LoadSceneAsync((int)nextScene, LoadSceneMode.Additive);
         _currentScene = nextScene;
     }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.UnloadSceneAsync((int)_currentScene);
+        SceneManager.LoadSceneAsync((int)SceneDefs.MENU, LoadSceneMode.Additive);
+        _currentScene = SceneDefs.MENU;
+    }
 }
 public enum SceneDefs : byte {
     Intial = 0, // 0.Launch

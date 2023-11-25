@@ -189,7 +189,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -211,7 +211,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 636e8b2da0c699b4e8bfbb7e09353ba0, type: 2}
   - {fileID: 11400000, guid: 0e158fd76852fe94ab0a9aead0b6c876, type: 2}
   - {fileID: 11400000, guid: d575a9215407c154d98d06e8f5ae030f, type: 2}
-  PlayerStats:
+  playerStats:
     health: 0
     name: 
     currentWeaponId: 
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeaponData: {fileID: 0}
   allWeapons: []
-  PlayerStats:
+  playerStats:
     health: 0
     name: 
     currentWeaponId: 
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeaponData: {fileID: 0}
   allWeapons: []
-  PlayerStats:
+  playerStats:
     health: 0
     name: 
     currentWeaponId: 
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeaponData: {fileID: 0}
   allWeapons: []
-  PlayerStats:
+  playerStats:
     health: 0
     name: 
     currentWeaponId: 
