@@ -6,6 +6,8 @@ TagManager:
   tags:
   - WeaponContainer
   - NextSceneTrigger
+  - UI
+  - Coin
   layers:
   - Default
   - TransparentFX

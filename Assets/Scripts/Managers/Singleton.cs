@@ -41,10 +41,9 @@ public class SingletonPersistant<T> : MonoBehaviour where T : Component
         {
             if (_instance == null)
             {
+                _instance = FindObjectOfType<T>();
                 Scene activeScene = SceneManager.GetActiveScene();
                 SceneManager.SetActiveScene(SceneManager.GetSceneByName("initial"));
-                _instance = FindObjectOfType<T>();
-                
                 if (_instance == null)
                 { 
                     GameObject singletonObject = new GameObject();
@@ -63,6 +62,11 @@ public class SingletonPersistant<T> : MonoBehaviour where T : Component
     {
         if (_instance == this)
             _instance = null;
+    }
+    public static void InitializeInstance()
+    {
+        // Accessing Instance property will initialize the instance
+        T temp = Instance;
     }
 }
 

@@ -40,10 +40,31 @@ public class JsonDataService : IDataService
                 Debug.LogError($"Unable to save data due to: {e.Message}{e.StackTrace}");
                 return false;
             }
-        }
+    }
     
     public T LoadData<T>(string RelativePath, bool Encrypted)
     {
-        throw new System.NotImplementedException();
+        string path = Application.persistentDataPath + RelativePath;
+
+        try
+        {
+            if (File.Exists(path))
+            {
+                string jsonData = File.ReadAllText(path);
+                T loadedData = JsonConvert.DeserializeObject<T>(jsonData);
+                return loadedData;
+            }
+            else
+            {
+                Debug.LogWarning("No data found at the specified path.");
+                return default(T); // Return default value if no data is found
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Unable to load data due to: {e.Message}{e.StackTrace}");
+            return default(T); // Return default value in case of an exception
+        }
     }
+
 }

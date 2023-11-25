@@ -14,18 +14,16 @@ public class AttackHandler : PlayerCore
         private float _lastAttackTime;
     #endregion
     
-    protected override void OnEnable()
+    protected  void OnEnable()
     {
         Debug.Log("atk override on enable");
-        base.OnEnable();
         PlayerEventHandler.OnAttack += HandleHitBox;
         PlayerEventHandler.OnFinish += AttackFinished;
         PlayerEventHandler.OnWeaponChanged += AttackHandler_OnWeaponChange;
         attackInput.action.performed += Attack;
     }
-    protected override void OnDisable()
+    protected  void OnDisable()
     {
-        base.OnDisable();
         PlayerEventHandler.OnAttack -= HandleHitBox;
         PlayerEventHandler.OnFinish -= AttackFinished;
         PlayerEventHandler.OnWeaponChanged -= AttackHandler_OnWeaponChange;

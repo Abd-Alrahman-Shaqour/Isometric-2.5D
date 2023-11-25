@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a834cd68713f426bbe5e94160ba69095, type: 3}
+  m_Name: NewEnemy
+  m_EditorClassIdentifier: 
+  movementSpeed: 3
+  health: 50
+  damage: 10
+  attackSpeed: 1
+  hitBox:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  goldValue: 50
+  visualPrefab: {fileID: 814189033770527985, guid: 1e726363dcc8420488c81491c0f93a0f, type: 3}
+  coinPrefab: {fileID: 2783554164656473390, guid: 7fb01a969a90c6c42a7c7001fcc46d5f, type: 3}
