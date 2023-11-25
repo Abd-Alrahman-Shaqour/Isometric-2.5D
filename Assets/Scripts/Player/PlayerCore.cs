@@ -30,7 +30,7 @@ public class PlayerCore : MonoBehaviour,IDamageable
 
         private void Start()
         {
-            _gameManager.PayerCore = this;
+            _gameManager.PlayerCore = this;
             LoadPlayerStats();
         }
       
@@ -72,6 +72,7 @@ public class PlayerCore : MonoBehaviour,IDamageable
                 playerStats.health = 100;
                 _gameManager.SaveGame();
                 _gameManager.UpdateGameState(GameState.GameOver);
+                _gameManager.LeveCompleted();
                 Destroy(gameObject);
             }
                 

@@ -1,4 +1,5 @@
 ﻿using System;
+using GameAnalyticsSDK;
 using UnityEngine;
 
 public class GameManager : SingletonPersistant<GameManager>
@@ -6,7 +7,7 @@ public class GameManager : SingletonPersistant<GameManager>
     public GameState state;
     public static event Action<GameState> OnGameStateChanged;
     private SaveManager _saveManager;
-    public PlayerCore PayerCore { get; set;}
+    public PlayerCore PlayerCore { get; set;}
 
     private void Awake()
     {
@@ -37,14 +38,19 @@ public class GameManager : SingletonPersistant<GameManager>
 
         OnGameStateChanged?.Invoke(newState);
     }
-    
+
+    public void LeveCompleted()
+    {
+        PlayerCore ??= FindObjectOfType<PlayerCore>();
+        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Complete, "CoinsCount", PlayerCore.playerStats.coins);
+    }
     
     public void SaveGame()
     {
-        PayerCore ??= FindObjectOfType<PlayerCore>();
+        PlayerCore ??= FindObjectOfType<PlayerCore>();
 
-        if (PayerCore != null)
-            _saveManager.SerializeJson(PayerCore.playerStats);
+        if (PlayerCore != null)
+            _saveManager.SerializeJson(PlayerCore.playerStats);
         else
             Debug.LogError("PlayerCoreNotFound");
     }

@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
-
+using GameAnalyticsSDK;
 public class GlowingOrb : MonoBehaviour
 {
     [SerializeField]private float animationDuration;
@@ -25,6 +21,7 @@ public class GlowingOrb : MonoBehaviour
         _audioManager = AudioManager.Instance;
         EnemySpawnManager.OnLevelStateChanged += EnemySpawnManagerOnLevelStateChanged;
         GameManager.OnGameStateChanged += GameManagerOnLevelStateChanged;
+        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, "Arena");
     }
     
 
@@ -63,6 +60,7 @@ public class GlowingOrb : MonoBehaviour
             _audioManager.Play("DoorOpen");
             doorExit.SetActive(true);
             _gameManager.SaveGame();
+            _gameManager.LeveCompleted();
         }     
     }
 

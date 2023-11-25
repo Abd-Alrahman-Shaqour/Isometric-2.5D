@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using GameAnalyticsSDK;
+using UnityEngine.SceneManagement;
 public class SceneChangeManager : Singleton<SceneChangeManager>
 {
     private SceneDefs _currentScene = SceneDefs.MENU;
@@ -6,6 +7,7 @@ public class SceneChangeManager : Singleton<SceneChangeManager>
     private void Awake()
     {
         SceneManager.LoadSceneAsync((int)_currentScene, LoadSceneMode.Additive);
+        GameAnalytics.Initialize();
     }
     public void NextScene(SceneDefs nextScene)
     {

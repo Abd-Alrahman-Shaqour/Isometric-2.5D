@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameAnalyticsSDK;
+using UnityEngine;
 
 public class HubAreaHandler : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class HubAreaHandler : MonoBehaviour
     void Start()
     { 
         _gameManager = GameManager.Instance;
-        _gameManager.UpdateGameState(GameState.GamePlay);   
+        _gameManager.UpdateGameState(GameState.GamePlay);
+        GameAnalytics.NewProgressionEvent (GAProgressionStatus.Start, "PlayerHub");
     }
 }

@@ -113,6 +113,17 @@
                 },
                 {
                     "name": "",
+                    "id": "9aa7ce53-81cb-4e0e-9c47-b282b3d776ae",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "96672b1e-fadc-404e-86aa-1a4750c3a935",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
