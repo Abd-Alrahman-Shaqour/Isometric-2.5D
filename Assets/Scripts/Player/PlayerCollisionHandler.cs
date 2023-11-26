@@ -1,4 +1,5 @@
-﻿    using UnityEngine;
+﻿    using DG.Tweening;
+    using UnityEngine;
     using Shiro.Weapons;
     using UnityEngine.UI;
 
@@ -31,7 +32,9 @@
 
             if (other.CompareTag("Coin"))
             {
-                _playerCore.CollectCoins(other.GetComponent<Coin>().value);
+                Coin coin = other.GetComponent<Coin>();
+                _playerCore.CollectCoins(coin.value);
+                coin.tween.Kill();
                 Destroy(other.gameObject);
             }
         

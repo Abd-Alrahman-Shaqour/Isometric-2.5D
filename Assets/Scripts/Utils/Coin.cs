@@ -6,14 +6,14 @@ using Unity.VisualScripting;
 public class Coin : MonoBehaviour
 {
     public int value;
-    private Tween _tween;
+    public Tween tween;
     void Start()
     {
-        _tween = transform.DOLocalMoveY(transform.position.y + 0.1f, 1f).SetLoops(-1,LoopType.Yoyo);
+        tween = transform.DOLocalMoveY(transform.position.y + 0.1f, 1f).SetLoops(-1,LoopType.Yoyo);
         
     }
     private void OnDestroy()
     {
-       _tween.Kill();
+      // tween.Kill();
     }
 }   
