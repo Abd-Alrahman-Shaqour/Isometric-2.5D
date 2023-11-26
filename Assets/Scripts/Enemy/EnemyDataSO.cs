@@ -16,4 +16,7 @@ public class EnemyDataSO : ScriptableObject
     public GameObject visualPrefab; // Prefab to visualize the enemy
 
     public GameObject coinPrefab; // Prefab of the coin dropped but the enemy
+    
+    [Header("Debug enemy weapon in scene view")]
+    public bool debug;
 }

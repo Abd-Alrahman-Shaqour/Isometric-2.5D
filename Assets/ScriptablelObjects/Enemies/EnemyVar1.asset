@@ -20,8 +20,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 0.54
+    width: 0.5
+    height: 0.5
   goldValue: 50
   visualPrefab: {fileID: 8385226143460851807, guid: 455955f45826db940bbd1601f491691f, type: 3}
   coinPrefab: {fileID: 2783554164656473390, guid: 7fb01a969a90c6c42a7c7001fcc46d5f, type: 3}

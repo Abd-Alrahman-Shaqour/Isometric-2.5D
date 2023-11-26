@@ -112,6 +112,10 @@ public class UIManager : SingletonPersistant<UIManager>
     {
         _sceneChangeManager.NextScene(SceneDefs.PlayerHub);
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 
      public void UpdateHealthBar(int playerHealth)
      {
