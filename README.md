@@ -43,7 +43,7 @@ To facilitate scene transitions, use an exit trigger prefab. Place this prefab a
 6. Build and Test
 Build the project and thoroughly test the new level. Ensure that all assets, events, and scene transitions function as expected. Debug and iterate as needed.
 
-# Scene Event Control: Glowing Orb Script
+# Scene Event Control: (Example:Glowing Orb Script)
 The GlowingOrb script serves as a powerful example of how a single script can efficiently control various events within a scene. Its modular design and event-driven approach make it a key component for scalable and easily expandable gameplay. Let's explore how this script becomes a central piece in managing scene events:
 
 ## Features
