@@ -2,7 +2,7 @@
 My submission for the MadHook Tech test
 
 # Project Scalability
-Introduction
+### Introduction
 This project has been designed with scalability in mind, allowing for the efficient addition of new levels and easy integration of new scripts to control events across scenes. Below are key features and practices that contribute to the project's scalability.
 
 # Features
