@@ -6,19 +6,21 @@ Introduction
 This project has been designed with scalability in mind, allowing for the efficient addition of new levels and easy integration of new scripts to control events across scenes. Below are key features and practices that contribute to the project's scalability.
 
 # Features
-1. Scene Architecture
+## 1. Scene Architecture
 The project follows a modular scene architecture that separates different aspects of the game, such as gameplay, UI, and events. Each scene focuses on a specific functionality, making it easier to manage and expand.
 
-2. Scriptable Objects
+## 2. Scriptable Objects
 Scriptable Object Architecture
 The extensive use of Scriptable Objects decouples data from code, enabling easy modification and extension without altering the underlying scripts. This is particularly useful for defining assets like weapons, enemies, and player stats.
 
-Game Events System
+## 3. Game Events System
 A robust Game Events system based on Scriptable Objects allows scripts to communicate across scenes. New scripts can simply subscribe to relevant events, providing a clean and organized way to control behavior.
 
-3. Singleton Design Pattern
+## 4. Singleton Design Pattern
 The Singleton design pattern is employed for manager classes like GameManager, UIManager, and SaveManager. This ensures that essential systems persist across scenes and can be easily accessed and modified.
 
+## 5. Centralized Reference Management
+A centralized reference management system helps find and set references dynamically during runtime. This optimizes the process of locating essential objects and UI elements, ensuring a smooth and error-free workflow.
 
 # Adding a New Level
 Adding a new level involves setting up the map using a tile editor, configuring events, and utilizing prefab assets. Below is a step-by-step guide:
