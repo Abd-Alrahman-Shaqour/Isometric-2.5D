@@ -1,4 +1,4 @@
-# MadHook-Isometric-2.5D
+# Isometric-2.5D-technical-showcase
 My submission for the MadHook Tech test
 
 # Project Scalability
