@@ -1,5 +1,5 @@
 # Isometric-2.5D-technical-showcase
-My submission for the MadHook Tech test
+My submission for a Tech test
 
 # Project Scalability
 ### Introduction
